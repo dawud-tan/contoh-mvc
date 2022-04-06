@@ -40,6 +40,4 @@ Setelah tomcat dijalankan, silahkan akses web berikut: http://127.0.0.1:8080/bar
 
 ## cara compile tanpa gradle
 
-gradlew war -Dorg.gradle.java.home="C:/Program Files/AdoptOpenJDK/jdk-8.0.275.1-hotspot"
-
 javac -cp "jakarta.enterprise.cdi-api-3.0.0.jar;jakarta.inject-api-2.0.0.jar;jakarta.mvc-api-2.0.0.jar;jakarta.servlet-api-5.0.0.jar;jakarta.validation-api-3.0.0.jar;jakarta.ws.rs-api-3.0.0.jar" kemasanku/*.java
