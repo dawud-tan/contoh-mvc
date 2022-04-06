@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="https://jakarta.ee/xml/ns/jakartaee"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+	   https://jakarta.ee/xml/ns/jakartaee/beans_3_0.xsd"
+	   bean-discovery-mode="all"
+	   version="3.0">
+
+	<!-- BLOK CDI WELD
+	Dokumentasi membind BeanManager ke JNDI. Docs tersedia di laman web berikut:
+	https://docs.jboss.org/weld/reference/4.0.3.Final/en-US/html/ri-spi.html#_binding_the_manager_in_jndi
+	https://docs.jboss.org/weld/reference/4.0.3.Final/en-US/html/environments.html#_tomcat -->
+</beans>

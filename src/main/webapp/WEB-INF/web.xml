@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+					  https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+		 version="5.0"
+		 metadata-complete="true">
+
+	<display-name>ROOT</display-name>
+
+	<!-- BLOK CDI WELD
+	Dokumentasi membind BeanManager ke JNDI. Docs tersedia di laman web berikut:
+	https://docs.jboss.org/weld/reference/4.0.3.Final/en-US/html/ri-spi.html#_binding_the_manager_in_jndi
+	https://docs.jboss.org/weld/reference/4.0.3.Final/en-US/html/environments.html#_tomcat -->
+	<resource-env-ref>
+		<resource-env-ref-name>BeanManaer</resource-env-ref-name>
+		<resource-env-ref-type>jakarta.enterprise.inject.spi.BeanManager</resource-env-ref-type>
+	</resource-env-ref>
+</web-app>

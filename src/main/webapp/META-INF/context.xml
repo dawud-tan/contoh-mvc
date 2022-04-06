@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="" reloadable="true" useHttpOnly="true">
+ 
+    <!-- BLOK CDI WELD
+    Dokumentasi membind BeanManager ke JNDI. Docs tersedia di laman web berikut:
+    https://docs.jboss.org/weld/reference/4.0.3.Final/en-US/html/ri-spi.html#_binding_the_manager_in_jndi
+    https://docs.jboss.org/weld/reference/4.0.3.Final/en-US/html/environments.html#_tomcat -->
+    <Resource name="BeanManager"
+              auth="Container"
+              type="jakarta.enterprise.inject.spi.BeanManager"
+              factory="org.jboss.weld.resources.ManagerObjectFactory"/>
+</Context>
