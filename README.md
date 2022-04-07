@@ -6,7 +6,7 @@ Setelah tomcat dijalankan, silahkan akses web berikut: http://127.0.0.1:8080/bar
 
 ## Deskripsi Projek
 1. Tomcat 10.0.18 mengimplementasikan API Servlet versi 5.0, JSP versi 3.0, dan EL versi 4.0
-2. Driver JDBC Oracle **ojdbc11.jar** dan **ManyUserRolesRealm.jar** disalin ke $CATALINA_HOME/lib
+2. Driver JDBC Oracle **ojdbc11.jar** dan **[ManyUserRolesRealm](https://github.com/dawud-tan/ManyUserRolesRealm).jar** disalin ke $CATALINA_HOME/lib
 3. Tambahkan `<Resource />` DataSourceFactory dan `<ResourceLink />` ke blok `<Context />` di dalam berkas **webapp/META-INF/context.xml**
     ```xml
     <Resource name="jdbc/NamaJDBC" auth="Container"
@@ -35,9 +35,17 @@ Setelah tomcat dijalankan, silahkan akses web berikut: http://127.0.0.1:8080/bar
     ```
 11. Tambahkan blok `<Realm />` ke blok `<Context />` di dalam berkas **webapp/META-INF/context.xml**
     ```xml
-    <Realm className="org.apache.catalina.realm.ManyUserRolesRealm" dataSourceName="jdbc/PungkookidVietnam" localDataSource="true" ... />
+    <Realm className="org.apache.catalina.realm.ManyUserRolesRealm" dataSourceName="jdbc/NamaJDBC" localDataSource="true" ... />
     ```
 
 ## cara compile tanpa gradle
 
-javac -cp "jakarta.enterprise.cdi-api-3.0.0.jar;jakarta.inject-api-2.0.0.jar;jakarta.mvc-api-2.0.0.jar;jakarta.servlet-api-5.0.0.jar;jakarta.validation-api-3.0.0.jar;jakarta.ws.rs-api-3.0.0.jar" kemasanku/*.java
+#### windows
+```bat
+"C:\Program Files\Eclipse Adoptium\jdk-17.0.2.8-hotspot\bin\javac" -cp "jakarta.enterprise.cdi-api-3.0.0.jar;jakarta.inject-api-2.0.0.jar;jakarta.mvc-api-2.0.0.jar;jakarta.servlet-api-5.0.0.jar;jakarta.validation-api-3.0.0.jar;jakarta.ws.rs-api-3.0.0.jar" kemasanku/*.java
+```
+
+#### linux
+```bash
+/usr/lib/jvm/temurin-17-jdk/bin/javac -cp "jakarta.enterprise.cdi-api-3.0.0.jar:jakarta.inject-api-2.0.0.jar:jakarta.mvc-api-2.0.0.jar:jakarta.servlet-api-5.0.0.jar:jakarta.validation-api-3.0.0.jar:jakarta.ws.rs-api-3.0.0.jar" kemasanku/*.java
+```
