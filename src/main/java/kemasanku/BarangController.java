@@ -1,100 +1,73 @@
 package kemasanku;
 
-import jakarta.enterprise.context.SessionScoped;
-import jakarta.inject.Inject;
-import jakarta.mvc.Controller;
-import jakarta.mvc.Models;
-import jakarta.mvc.View;
-import jakarta.mvc.binding.BindingResult;
-import jakarta.mvc.binding.MvcBinding;
-import jakarta.mvc.binding.ParamError;
-import jakarta.mvc.security.CsrfProtected;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.FormParam;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-
-import java.io.Serializable;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
-@SessionScoped
-@Controller
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+import javax.validation.Valid;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import org.glassfish.jersey.server.mvc.ErrorTemplate;
+import org.glassfish.jersey.server.mvc.Viewable;
+
 @Path("/")
-public class BarangController implements Serializable {
+public class BarangController {
 
-	@Inject
-	private Models modelnya;
+	private Map<String, Object> modelnya = new HashMap<>();
 	private List <String> isiKeranjang = new ArrayList<>();
 
-	@Inject
-	private BindingResult validasi;
-
-	@Inject
-	private PesanGalat pesanGalat;
-
-	@Inject
-	private HttpServletRequest request;
-
 	public BarangController() {
-		isiKeranjang.add("Laptop");
+		isiKeranjang.add("Laptop Kerja");
 		isiKeranjang.add("Tetikus Nirkabel");
 	}
 
 	@GET
 	@Path("barang")
 	@Produces(MediaType.TEXT_HTML)
-	@View("daftar_barang.jsp")
-	public void daftarBarang() {
+	public Viewable daftarBarang() {
 		modelnya.put("pengguna", "manto");
 		modelnya.put("daftarBarang", isiKeranjang);
+		return new Viewable("/daftar_barang", modelnya);
 	}
 
 	@POST
-	@CsrfProtected
 	@Path("barang")
+	@Produces(MediaType.TEXT_HTML)
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-	public String tambahBarang(
-		@MvcBinding
-		@NotEmpty(message = "nama barang tidak boleh dikosongi")
+	@ErrorTemplate(name = "/daftar_barang")
+	public Response tambahBarang(
+	    @Valid
+	    @NotEmpty(message = "nama barang tidak boleh dikosongi")
 		@Size(min = 2, message = "nama barang minimal 2 karakter")
 		@FormParam("namaBarang") String namaBarang) {
-			if (adakahPesanGalat()) {
-				modelnya.put("pesanGalat", pesanGalat);
-				return "redirect:/barang";
-			}
 
 		isiKeranjang.add(namaBarang);
-		return "redirect:/barang";
+		return Response.seeOther(URI.create("/barang")).build();
 	}
 
 	@POST
 	@Path("hapus-sesi")
-	public Response hapusSesi() {
+	public Response hapusSesi(@Context HttpServletRequest request) {
 		HttpSession sesi = request.getSession(false);
 		if (sesi != null) {
 			sesi.invalidate();
 		}
 		return Response.seeOther(URI.create("/barang")).build();
-	}
-
-	private boolean adakahPesanGalat() {
-		if (validasi.isFailed()) {
-			validasi.getAllErrors().stream().forEach((ParamError pg) -> {
-				pesanGalat.tambahPesanGalat(pg.getMessage());
-			});
-			return true;
-		}
-		return false;
 	}
 
 }

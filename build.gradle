@@ -3,52 +3,39 @@ plugins {
 	id 'war'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
-	providedCompile 'org.apache.tomcat:tomcat-servlet-api:10.0.18' //Maret 2022
-	providedCompile 'org.apache.tomcat:tomcat-jsp-api:10.0.18' //Maret 2022
-	providedCompile 'org.apache.tomcat:tomcat-el-api:10.0.18' //Maret 2022
+	providedCompile 'org.apache.tomcat:tomcat-servlet-api:9.0.62' //Maret 2022
+	providedCompile 'org.apache.tomcat:tomcat-jsp-api:9.0.62' //Maret 2022
+	providedCompile 'org.apache.tomcat:tomcat-el-api:9.0.62' //Maret 2022
 
-	implementation 'jakarta.mvc:jakarta.mvc-api:2.0.0' //Desember 2020
-	implementation 'org.eclipse.krazo:krazo-jersey:2.0.1' //Mei 2021
-
-	/* Integrasi JAX-RS 3.0 (Jersey 3.04), CDI 3.0 (Weld 4.0.3), dan Servlet 5.0 (Tomcat 10):
-	 * https://eclipse-ee4j.github.io/jersey.github.io/documentation/latest3x/cdi.support.html#cdi.support.existing.containers
-	 * https://github.com/eclipse-ee4j/jersey/blob/3.x/examples/cdi-webapp/pom.xml#L142
-	 **/
-	implementation 'jakarta.ws.rs:jakarta.ws.rs-api:3.0.0' //November 2020	
-	implementation 'org.glassfish.jersey.containers:jersey-container-servlet:3.0.4' //Februari 2022
-	implementation 'org.glassfish.jersey.ext.cdi:jersey-cdi1x-servlet:3.0.4' //Februari 2022
-	implementation 'org.glassfish.jersey.inject:jersey-hk2:3.0.4' //Februari 2022
-	implementation 'org.glassfish.jersey.ext:jersey-bean-validation:3.0.4' //Februari 2022
-	implementation 'org.hibernate.validator:hibernate-validator:7.0.4.Final' //Maret 2022
-	implementation 'org.jboss.weld.servlet:weld-servlet-core:4.0.3.Final' //Februari 2022
-	implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0' //November 2020
-	implementation 'org.hibernate:hibernate-core-jakarta:5.6.7.Final' //Januari 2022
-	implementation 'org.glassfish.jaxb:jaxb-runtime:3.0.2' //Agustus 2021
-	implementation 'com.vladmihalcea:hibernate-types-55:2.14.0' //Oct, 2021
+	implementation 'org.glassfish.jersey.ext:jersey-mvc-jsp:2.35' //September 2021
+	implementation 'org.glassfish.jersey.containers:jersey-container-servlet:2.35' //September 2021
+	implementation 'org.glassfish.jersey.inject:jersey-hk2:2.35' //September 2021
+	implementation 'org.glassfish.jersey.ext:jersey-mvc-bean-validation:2.35' //September 2021
+	implementation 'org.hibernate.validator:hibernate-validator:6.2.3.Final' //Maret 2022
+	implementation 'org.glassfish.web:jstl-impl:1.2' //Juni 2011
+	implementation 'org.hibernate:hibernate-entitymanager:5.4.14.Final' //April 2020
+	implementation 'com.vladmihalcea:hibernate-types-52:2.16.1' //April 2022
 	implementation 'org.slf4j:slf4j-reload4j:1.7.36'
-	providedCompile 'com.oracle.database.jdbc:ojdbc11:21.5.0.0' //Februari 2022
-	implementation 'net.sargue:java-time-jsptags:2.0.0'
+	providedCompile 'com.oracle.database.jdbc:ojdbc8:21.5.0.0' //Februari 2022
+	implementation 'net.sargue:java-time-jsptags:1.1.4'
 
 	configurations.implementation {
 		exclude(group: 'com.fasterxml.jackson.core', module: 'jackson-annotations')
+		exclude(group: 'com.fasterxml.jackson', module: 'jackson-bom')
 		exclude(group: 'com.fasterxml.jackson.core', module: 'jackson-core')
 		exclude(group: 'com.fasterxml.jackson.core', module: 'jackson-databind')
 		exclude(group: 'com.fasterxml.jackson.module', module: 'jackson-module-jaxb-annotations')
 		exclude(group: 'jakarta.annotation', module: 'jakarta.annotation-api')
-		exclude(group: 'jakarta.el', module: 'jakarta.el-api')
-		exclude(group: 'jakarta.servlet', module: 'jakarta.servlet-api')
-		exclude(group: 'jakarta.servlet.jsp', module: 'jakarta.servlet.jsp-api')
+		exclude(group: 'javax.servlet', module: 'servlet-api')
+		exclude(group: 'javax.servlet.jsp', module: 'jsp-api')
 		exclude(group: 'org.dom4j', module: 'dom4j')
-		exclude(group: 'org.glassfish', module: 'jakarta.el')
-		exclude(group: 'org.jboss.weld.module', module: 'weld-jsf')
-		exclude(group: 'org.jboss.weld.probe', module: 'weld-probe-core')
 	}
 }
