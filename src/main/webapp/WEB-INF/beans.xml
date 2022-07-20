@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="" reloadable="true" containerSciFilter="org.apache.tomcat.websocket.server.WsSci">
-
-    <JarScanner>
-        <JarScanFilter defaultTldScan="false"/>
-    </JarScanner>
+<beans xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+	   http://xmlns.jcp.org/xml/ns/javaee/beans_2_0.xsd"
+       bean-discovery-mode="all"
+       version="2.0">
 
     <!--BLOK CDI WELD
     Dokumentasi membind BeanManager ke JNDI tersedia di laman web berikut:
     https://web.archive.org/web/20210507040439/https://docs.jboss.org/weld/reference/latest-3.1/en-US/html/environments.html#_binding_beanmanager_to_jndi
     https://web.archive.org/web/20210507040439/https://docs.jboss.org/weld/reference/latest-3.1/en-US/html/environments.html#_tomcat-->
-    <Resource name="BeanManager"
-              auth="Container"
-              type="javax.enterprise.inject.spi.BeanManager"
-              factory="org.jboss.weld.resources.ManagerObjectFactory"/>
-</Context>
+</beans>
