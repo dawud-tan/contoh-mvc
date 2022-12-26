@@ -1,58 +1,58 @@
 plugins {
-	id 'java'
-	id 'war'
+    id 'java'
+    id 'war'
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	def versiTomcat = '7.0.109' //April 2021
-	providedCompile 'org.apache.tomcat:tomcat-annotations-api:8.0.53' //Juni 2018
-	providedCompile "org.apache.tomcat:tomcat-servlet-api:${versiTomcat}" //April 2021
-	providedCompile "org.apache.tomcat:tomcat-catalina:${versiTomcat}" //April 2021
+    def versiTomcat = '7.0.109' //April 2021
+    providedCompile 'org.apache.tomcat:tomcat-annotations-api:8.0.53' //Juni 2018
+    providedCompile "org.apache.tomcat:tomcat-servlet-api:${versiTomcat}" //April 2021
+    providedCompile "org.apache.tomcat:tomcat-catalina:${versiTomcat}" //April 2021
 
-	implementation 'org.eclipse.krazo:krazo-jersey:1.1.1' //Februari 2022
+    implementation 'org.eclipse.krazo:krazo-jersey:1.1.1' //Februari 2022
 
-	/* Integrasi JAX-RS 2.1 (Jersey 2.35), CDI 2.0 (Weld 3.1.9), dan Servlet 3.0 (Tomcat 7):
-	 * https://eclipse-ee4j.github.io/jersey.github.io/documentation/2.35/user-guide.html#cdi.support.existing.containers
-	 * https://github.com/eclipse-ee4j/jersey/blob/e682eb98080f9672b071127feb838fa55477ea96/examples/cdi-webapp/pom.xml#L134
-	 **/
-	implementation 'org.glassfish.jersey.containers:jersey-container-servlet:2.36' //September 2021
-	implementation 'org.glassfish.jersey.ext.cdi:jersey-cdi1x-servlet:2.36' //September 2021
-	implementation 'org.glassfish.jersey.ext.cdi:jersey-cdi1x-ban-custom-hk2-binding:2.36' //September 2021
-	implementation 'org.glassfish.jersey.inject:jersey-hk2:2.36' //September 2021
-	implementation 'org.glassfish.jersey.ext:jersey-bean-validation:2.36' //September 2021
-	implementation 'org.hibernate.validator:hibernate-validator:6.2.3.Final' //Maret 2022
-	implementation 'org.jboss.weld.servlet:weld-servlet-core:3.1.9.Final' //Februari 2022
-	implementation 'org.apache.taglibs:taglibs-standard-spec:1.2.5' //Maret 2015
-	implementation 'org.apache.taglibs:taglibs-standard-impl:1.2.5' //Maret 2015
-	implementation 'org.hibernate:hibernate-entitymanager:5.6.10.Final' //April 2022
-	implementation 'com.vladmihalcea:hibernate-types-55:2.14.1' //Maret 2022
-	implementation 'org.slf4j:slf4j-reload4j:1.7.36' //Februari 2022
-	providedCompile 'com.oracle.database.jdbc:ojdbc11:21.6.0.0.1' //Februari 2022
-	implementation 'net.sargue:java-time-jsptags:1.1.4' //Juni 2017
+    /* Integrasi JAX-RS 2.1 (Jersey 2.35), CDI 2.0 (Weld 3.1.9), dan Servlet 3.0 (Tomcat 7):
+     * https://eclipse-ee4j.github.io/jersey.github.io/documentation/2.35/user-guide.html#cdi.support.existing.containers
+     * https://github.com/eclipse-ee4j/jersey/blob/e682eb98080f9672b071127feb838fa55477ea96/examples/cdi-webapp/pom.xml#L134
+     **/
+    implementation 'org.glassfish.jersey.containers:jersey-container-servlet:2.38' //Desember 2022
+    implementation 'org.glassfish.jersey.ext.cdi:jersey-cdi1x-servlet:2.38' //Desember 2022
+    implementation 'org.glassfish.jersey.ext.cdi:jersey-cdi1x-ban-custom-hk2-binding:2.38' //Desember 2022
+    implementation 'org.glassfish.jersey.inject:jersey-hk2:2.38' //Desember 2022
+    implementation 'org.glassfish.jersey.ext:jersey-bean-validation:2.38' //Desember 2022
+    implementation 'org.hibernate.validator:hibernate-validator:6.2.5.Final' //September 2022
+    implementation 'org.jboss.weld.servlet:weld-servlet-core:3.1.9.Final' //Februari 2022
+    implementation 'org.apache.taglibs:taglibs-standard-spec:1.2.5' //Maret 2015
+    implementation 'org.apache.taglibs:taglibs-standard-impl:1.2.5' //Maret 2015
+    implementation 'org.hibernate:hibernate-entitymanager:5.6.14.Final' //November 2022
+    implementation 'com.vladmihalcea:hibernate-types-55:2.14.1' //Maret 2022
+    implementation 'org.slf4j:slf4j-reload4j:1.7.36' //Februari 2022
+    providedCompile 'com.oracle.database.jdbc:ojdbc11:21.8.0.0' //Desember 2022
+    implementation 'net.sargue:java-time-jsptags:1.1.4' //Juni 2017
 
-	configurations.implementation {
-		exclude(group: 'com.fasterxml.jackson', module: 'jackson-bom')
-		exclude(group: 'com.fasterxml.jackson.core', module: 'jackson-annotations')
-		exclude(group: 'com.fasterxml.jackson.core', module: 'jackson-core')
-		exclude(group: 'com.fasterxml.jackson.core', module: 'jackson-databind')
-		exclude(group: 'com.fasterxml.jackson.module', module: 'jackson-module-jaxb-annotations')
-		exclude(group: 'jakarta.annotation', module: 'jakarta.annotation-api')
-		exclude(group: 'jakarta.el', module: 'jakarta.el-api')
-		exclude(group: 'jakarta.servlet', module: 'jakarta.servlet-api')
-		exclude(group: 'jakarta.servlet.jsp', module: 'jakarta.servlet.jsp-api')
-		exclude(group: 'javax.servlet', module: 'servlet-api')
-		exclude(group: 'javax.servlet.jsp', module: 'jsp-api')
-		exclude(group: 'org.glassfish', module: 'jakarta.el')
-		exclude(group: 'org.jboss.spec.javax.annotation', module: 'jboss-annotations-api_1.3_spec')
-		exclude(group: 'org.jboss.spec.javax.el', module: 'jboss-el-api_3.0_spec')
-		exclude(group: 'org.jboss.weld.module', module: 'weld-jsf')
-		exclude(group: 'org.jboss.weld.probe', module: 'weld-probe-core')
-	}
+    configurations.implementation {
+        exclude(group: 'com.fasterxml.jackson', module: 'jackson-bom')
+        exclude(group: 'com.fasterxml.jackson.core', module: 'jackson-annotations')
+        exclude(group: 'com.fasterxml.jackson.core', module: 'jackson-core')
+        exclude(group: 'com.fasterxml.jackson.core', module: 'jackson-databind')
+        exclude(group: 'com.fasterxml.jackson.module', module: 'jackson-module-jaxb-annotations')
+        exclude(group: 'jakarta.annotation', module: 'jakarta.annotation-api')
+        exclude(group: 'jakarta.el', module: 'jakarta.el-api')
+        exclude(group: 'jakarta.servlet', module: 'jakarta.servlet-api')
+        exclude(group: 'jakarta.servlet.jsp', module: 'jakarta.servlet.jsp-api')
+        exclude(group: 'javax.servlet', module: 'servlet-api')
+        exclude(group: 'javax.servlet.jsp', module: 'jsp-api')
+        exclude(group: 'org.glassfish', module: 'jakarta.el')
+        exclude(group: 'org.jboss.spec.javax.annotation', module: 'jboss-annotations-api_1.3_spec')
+        exclude(group: 'org.jboss.spec.javax.el', module: 'jboss-el-api_3.0_spec')
+        exclude(group: 'org.jboss.weld.module', module: 'weld-jsf')
+        exclude(group: 'org.jboss.weld.probe', module: 'weld-probe-core')
+    }
 }
